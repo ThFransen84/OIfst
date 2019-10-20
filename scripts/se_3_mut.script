@@ -1,0 +1,41 @@
+#***** se_3_mut.script *****
+# Th. Fransen, 19/08/19
+# Apply mutation transducers and replace rules (mut.script) to absolute and conjunct forms
+
+clear stack
+
+echo >>> Opening 'se_3_mut.script' ...
+
+set flag-is-epsilon ON
+
+#\\\\\ SIMPLE ABSOLUTE RELATIVE /////
+
+echo >>> Applying nasalisation to absolute relative forms and unioning lexicons ...
+
+# Union simple absolute lexicon with nasalising absolute relative
+# e.g. mbrises
+define LEXabsWithNasRel [ [ LEXseAbs |
+[ nasTwoLevel [$"+REL" .o. LEXseAbs] .o. nasLower ] ]
+] ;
+
+echo >>> Deleting +'s on upper level ...
+# Delete remaining initial +'s on the upper level.
+# invert lexicon as replace rules target lower level, invert afterwards
+define LEXabsWithNasRelClean [ LEXabsWithNasRel.i .o.
+["+" -> 0 , "+NAS" -> "NAS" || .#. _] 
+].i ; 
+
+#\\\\\ CONJUNCT /////
+
+# Conj. forms (incl. imperative) are potentially separated from their pretonic prefix and might have received an initial consonant mutation.
+# For strings consecutive to the 'stem', the right mutations can be sorted later with deleting incompatible mutation tags (upper level).
+# Most mutations are coded as optional ones, e.g. m (->) mm (nas, h-mut), except obligatory ones like t->th, d->nd etc.
+
+echo >>> Applying mutations with conjunct forms and unioning lexicons ...
+define LEXseConjWithMut  [
+[ LEXseConj .o. nonLenAnlaut ] |
+[ [ mutTwoLevel LEXseConj ] .o. mutLower ] |
+LEXseConj
+] ;
+
+set flag-is-epsilon OFF

@@ -1,0 +1,20 @@
+#***** 2_se_phon_non_pres_stem_form.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# Replace rules regarding non-present weak stem formation (f-fut, s-pret)
+
+regex [
+# e.g. marbā-iF -> marbi^F, marbā^F, léicī^F -> léici^F
+[ ā (->) i , ī -> i || _ "^F" ] .o.	
+
+# marbā^FØ -> marbu^FØ, marbi^FØ -> marbiu^FØ, léici^FØ -> léiciu^FØ
+[ ā -> u , i -> {iu} || _ "^F" Ø [.#. | "-" ] ] .o.		
+
+[ [..] -> ə || "^F" _ Cons ] .o.
+["^S" -> 0 || _ Ø ] .o.
+
+# *léicis wrong pret rel. 3sg?  
+# make sure ī becomes i before s-stem consonant (not marked palatal), otherwise lowered
+[ī -> i || _ "^S" ] .o. 
+[ "^S" "^U" -> u "^S" ] #[ "^S" "^U" -> [u|a] "^S" ]
+] ;

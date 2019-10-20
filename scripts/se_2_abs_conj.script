@@ -1,0 +1,18 @@
+#***** se_2_abs_conj.script *****
+# Th. Fransen, 18/08/19
+# Extract absolute and conjunct endings
+# Deuterotonic forms (R.PV.X) do not come up when flags obeyed
+
+echo >>> Opening 'se_2_abs_conj.script' ...
+
+clear stack
+
+echo >>> Defining absolute and conjunct lexicons ...
+
+#\\\\\ SIMPLE ABSOLUTE FORMS /////
+
+define LEXseAbs [$["+ABS"] .o. LEXseBare] ;
+
+#\\\\\ CONJUNCT FORMS /////
+
+define LEXseConj [$["+CONJ"] .o. LEXseBare] ;

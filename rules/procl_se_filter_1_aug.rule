@@ -1,0 +1,11 @@
+#***** procl_se_filter_1_aug.rule *****
+# Th. Fransen, 20/08/19
+# Invoked as part of procl_se.script
+# Filter out forms incompatible with the augment
+
+regex [
+~[ $["+AUG" ?* "+AUG"] ] .o.
+~[ $["+AUG" ?* "+IMP"] ] .o.
+~[ $["+AUG" ?* "+PROCL_JUNCT" ?* "+PV1"] ] .o.
+~[ $[ "+AUG" ?* [{tá}|{fil}] "+VROOT" "+SUBST"] ]
+] ;

@@ -1,0 +1,15 @@
+#***** 5_se_phon_del_stem_vow.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# Delete W1/W2a stem vowels before vowels and where there is no end vowel
+
+# Rules should apply after e.g. palatalisation otherwise endings such as pret. conj. 3sg tarlaic become tarlac.
+# stem vowel in tarələcī, that points at palatal auslaut, is needed for palat. rule.
+
+# e.g. imp 2sg marbā-Ø, subj abs 1 sg marbā-a
+# pres.ind. conj 2sg léicī-i, imp 2sg léicī-Ø	
+regex [
+[ā -> 0 || _ a|u|Ø ] .o. # e.g.  
+[ī -> 0 || _ e|i|Ø ] .o. # e.g. 
+[Ø -> 0 ]
+] ;

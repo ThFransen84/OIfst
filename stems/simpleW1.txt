@@ -1,0 +1,23 @@
++an+VROOT:an						W1;
+
++car+VROOT:car						W1;
+
++celebrare+VROOT:celebr				W1;
+
++fer+VROOT:fer						W1;
+
++marb+VROOT:marb					W1;
+
++gat+VROOT:gat						W1;	
+
++íad+VROOT:íad						W1;
+
++las+VROOT:las						W1;
+
++marb+VROOT:marb					W1;
+
++múch+VROOT:múch					W1;
+
++rann+VROOT:rann					W1;
+
++scar+VROOT:scar					W1;

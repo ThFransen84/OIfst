@@ -1,0 +1,23 @@
+#***** alphabet.script *****
+# Th. Fransen, 16/08/19
+# Defined variables invoked in subsequent scripts and rules
+
+echo >>> Opening 'alphabet.script' ...
+
+clear stack
+
+echo >>> Defining consonants and vowels ...
+
+define nonPalCons [b|c|d|f|g|h|l|m|n|p|r|s|t|μ|θ|
+"^D"|"^F"|"^M"|"^N"|"^S"] ;
+define palCons [nonPalCons ' ];
+define Cons [ nonPalCons | palCons ] ;
+define backVowShort [a|o|u] ;
+define backVowLong [á|ā|ó|ú];
+define backVow [backVowShort | backVowLong ] ;
+define frontVowShort [e|i] ;
+define frontVowLong [é|í|ī] ;
+define frontVow [frontVowShort | frontVowLong ] ;
+define shortVow [ backVowShort | frontVowShort] ;
+define longVow [backVowLong | frontVowLong] ;
+define Vow [backVow | frontVow | ə | "^V"] ;

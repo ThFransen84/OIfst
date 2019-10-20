@@ -1,0 +1,60 @@
+#***** mutation.script *****
+# Th. Fransen, 19/08/19
+# Define two-level mutation symbols (transducers) and manipulate lower-level symbols
+# This script also defines non-leniting anlaut consonants
+
+echo >>> Opening 'mutation.script' ...
+
+clear stack
+
+echo >>> Defining mutation transducers ...
+
+#\\\\\ LENITION /////
+
+# Two-level symbols
+define lenTwoLevel ["+LEN":"^LEN" ] ;
+
+# Lower-level rules
+define lenLower [
+[ [..] -> h || "^LEN" [c|p|t] _ ] .o.
+# No lenition with sc, sp, st, sm
+[ s (->) ṡ || "^LEN" _ \[c|p|t|m] ] .o.
+[ f (->) ḟ|0 || "^LEN" _ ] .o.
+"^LEN" -> 0
+] ;
+
+#\\\\\ NASALISATION /////
+
+# Two-level symbols
+define nasTwoLevel ["+NAS":"^NAS"] ;
+
+# Lower-level rules
+define nasLower [
+[ m (->) {mm} , n (->) {nn} , r (->) {rr} , l (->) {ll} || 
+"^NAS" _ ] .o.
+[ [..] -> [n|ṅ] "-" || "^NAS" _ Vow ] .o.
+[ [..] -> [n|ṅ] 	|| "^NAS" _ d|g ] .o.
+[ [..] -> m || "^NAS" _ b] .o.
+"^NAS" -> 0
+] ;
+
+#\\\\\ H-MUTATION /////
+
+# Two-level symbols
+define hTwoLevel ["+H":"^H"] ;
+
+# Lower-level rules
+define hLower [ [ c (->) {cc} , d (->) {dd} , f (->) {ff} , g (->) {gg} , l (->) {ll} , m (->) {mm} , n (->) {nn} , p (->) {pp} , r (->) {rr} , s (->) {ss} , t (->) {tt} || "^H" _ ] .o.
+"^H" -> 0 ] ;
+
+#\\\\\ UNION MUTATION TRANSDUCERS AND REPLACE RULES /////
+
+define mutTwoLevel [ lenTwoLevel | nasTwoLevel | hTwoLevel ] ;
+
+# Lower
+define mutLower [ lenLower .o. nasLower .o. hLower .o. [ "^LEN"|"^NAS"|"^H" -> 0 ] ] ;
+
+#\\\\\ NON-LEN. ANLAUT CONSONANTS /////
+
+define nonLenAnlaut [ 
+[ m -> {mm} , n -> {nn} , r -> {rr} , l -> {ll} || .#. _ ] ] ;

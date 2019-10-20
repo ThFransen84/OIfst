@@ -1,0 +1,15 @@
+#***** v_all_cap_filter_imp.rule *****
+# Th. Fransen, 21/08/19
+# Invoked as part of v_all.script
+# Upper-level filters to select those imp. forms we expect can occur with a capital, i.e. independent forms not preceded by mutations, and only with emph. particles agreeing with the verb ending.
+# Currently wrongly excludes independ. protot. (non-imp.) capitalised Timchellad etc.
+
+regex [ 
+$["+IMP"] .o.
+~$["LEN"|"NAS"|"H"] .o.
+~$["+1P" ?* "+EMPH" \"+1P"] .o.
+~$["+2P" ?* "+EMPH" \"+2P"] .o.
+~$["+3P" ?* "+EMPH" \"+3P"] .o.
+~$["+SG" ?* "+EMPH" ? \"+SG"] .o.
+~$["+PL" ?* "+EMPH" ? \"+PL"] 
+] ;

@@ -1,0 +1,16 @@
+#***** 1_se_filters.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# Upper-level filters to remove incompatible tag combinations from the network
+
+regex [
+# No preceding elements with absolute endings
+# This also excludes prototonic bases (+PV1 can only be protot in se.lexc)
+~[ $[ ["+PV1"|"+AUG"|"+IMP"] ?* "+ABS"] ] .o.
+
+# complement of @D.PV@ = @R.PV.X = deut	
+~[ ~$["@D.PV@"] & $["+ABS"] ] .o.
+
+# no augment with the imperative
+~[ $[ "+AUG" ?* "+IMP" ]] 
+] ;

@@ -1,0 +1,34 @@
+#***** 13_se_phon_orth_cons.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# Rewrite phonological and abstract orthographic consonant symbols
+
+regex [
+# consecutive s's
+["^S" -> 0 || {ss} _ ] .o. 		# bris(s)-^Sis
+["^S" -> [ 0 | s ] || s _ ] .o.
+[{ss} (->) s] .o.
+["^S" -> s] .o.
+
+# Delenition
+[ θ -> t || d|l|n|s|t _ ] .o. 
+[ d -> 0 , t (->) 0 || _ t  ] .o.
+
+# voicing / devoicing
+[θ -> {th} || Cons _ ] .o.
+[θ -> {th}|d ] .o.
+
+# protot. aid(e)l- ( < ad-ell)
+[ l -> 0 || d _ l ]	.o.		
+
+["^D" -> t || Vow _ ] .o.
+["^D" -> d|t ] .o.
+["^M" -> m || Cons _ Vow ] .o.
+["^M" -> m | {mm} ] .o.
+["^N" -> {nn}] .o.
+[μ -> m] .o.
+[b (->) 0 || _ "^F" ] .o.
+["^F" -> b || _ .#. | "-" ] .o.
+["^F" (->) b || Vow _ ] .o.
+["^F" -> f]
+] ;

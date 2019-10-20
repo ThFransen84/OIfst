@@ -1,0 +1,22 @@
+#***** all.script *****
+# Th. Fransen, 21/08/19
+# Combine additional lexicons (tbf) with OI verb transducer
+
+echo >>> Opening 'all.script' ...
+
+clear stack
+
+# full-form lexicon with a selection of forms from Táin Bó Fraích (Meid 1974)
+
+echo >>> Reading in 'tbf.lexc' ...
+read lexc < tbf.lexc
+define LEXtbf
+
+echo >>> Capitalisation ...
+define LEXtbf [ LEXtbf | [LEXtbf .o. capRule] ] ;
+
+echo >>> Unioning 'oiv.fst' with additional lexicons
+regex [@"oiv.fst" | LEXtbf] ;
+
+echo >>> Saving stack to file ...
+save stack oiAll.fst

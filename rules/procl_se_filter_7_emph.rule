@@ -1,0 +1,28 @@
+#***** procl_se_filter_7_emph.rule *****
+# Th. Fransen, 20/08/19
+# Invoked as part of procl_se.script
+# Filter out emphasising particles incompatible with infixed pron. and verbal endings
+# This file defines temporary lexicons (LEXfilteredTemp2-15)
+
+define LEXfilteredTemp2 [ ~[ ~$["+1P" "+SG" ?* "+EMPH"] & $["+EMPH" "+1P" "+SG"] ] .o. LEXfilteredTemp1 ] ;
+define LEXfilteredTemp3 [ ~[ ~$["+2P" "+SG" ?* "+EMPH"] & $["+EMPH" "+2P" "+SG"] ] .o. LEXfilteredTemp2 ] ;
+define LEXfilteredTemp4 [ ~[ ~$["+3P" "+SG" ?* "+EMPH"] & $["+EMPH" "+3P" "+SG"] ] .o. LEXfilteredTemp3 ] ;
+define LEXfilteredTemp5 [ ~[ ~$["+1P" "+PL" ?* "+EMPH"] & $["+EMPH" "+1P" "+PL"] ] .o. LEXfilteredTemp4 ] ;
+define LEXfilteredTemp6 [ ~[ ~$["+2P" "+PL" ?* "+EMPH"] & $["+EMPH" "+2P" "+PL"] ] .o. LEXfilteredTemp5 ] ;
+define LEXfilteredTemp7 [ ~[ ~$["+3P" "+PL" ?* "+EMPH"] & $["+EMPH" "+3P" "+PL"] ] .o. LEXfilteredTemp6 ] ;
+define LEXfilteredTemp8 [ ~[ $["+MASC" ?* "+EMPH"] & ~$[["+ABS"|"+CONJ"] "+3P" "+SG"] & $["+EMPH" "+3P" "+SG" ["+NEUT"|"+FEM"]] ] .o. LEXfilteredTemp7 ] ;
+define LEXfilteredTemp9 [ ~[ $["+NEUT" ?* "+EMPH"] & ~$[["+ABS"|"+CONJ"] "+3P" "+SG"] & $["+EMPH" "+3P" "+SG" ["+MASC"|"+FEM"]] ] .o. LEXfilteredTemp8 ] ;
+define LEXfilteredTemp10 [ ~[ $["+FEM" ?* "+EMPH"] & ~$[["+ABS"|"+CONJ"] "+3P" "+SG"] & $["+EMPH" "+3P" "+SG" ["+MASC"|"+NEUT"]] ] .o. LEXfilteredTemp9 ] ;
+
+#\\\\\ PASSIVE AND SV /////
+
+# the emph. part. should refer to the pronoun with the SV and passive, which is the subject, not the 3sg ending, i.e. no emph. particle 3sg with pass 3sg conj, which only takes non-3sg 'subjects' (the incompatible 3sg pronoun infix with passives (for which there is an absolute form) already filtered out in procl_se_filter_pass.rule)
+define LEXfilteredTemp11 [ [ ~[$["+PRON" ?* "+PASS" ?* "+EMPH" "+3P" "+SG"]] ] .o. LEXfilteredTemp10 ] ;
+
+# The SV 3sg may take all pronouns and also an emph. part. to refer to the 3sg infix, but with other than infixed 3sg the emph. part. must refer to the 'subject' infix. pron. and must not agree with the 3sg ending.
+# As the infixed pron. is the subject of the 3sg ending the emph. part. obligatorily agrees with the gender of the infix. The ending and emph. particle agreement rule with other verbs does not suffice, as there we can have a 3sg ending and any 3sg. emph. particle, irrespective of the infixed pron.
+define LEXfilteredTemp12 [ ~[ $["+PRON" (?) ["+1P"|"+2P"|"+3P" "+PL"] ?* "+VROOT" "+SUBST" ?* "+EMPH" "+3P" "+SG"] ] .o. LEXfilteredTemp11 ] ;
+define LEXfilteredTemp13 [
+~[ $["+PRON" (?) "+3P" "+SG" "+MASC" ?* "+VROOT" "+SUBST" ?* "+EMPH" "+3P" "+SG" ["+NEUT"|"+FEM"]] ] .o. LEXfilteredTemp12 ] ;
+define LEXfilteredTemp14 [ ~[ $["+PRON" (?) "+3P" "+SG" "+NEUT" ?* "+VROOT" "+SUBST" ?* "+EMPH" "+3P" "+SG" ["+MASC"|"+FEM"]] ] .o. LEXfilteredTemp13 ] ;
+define LEXfilteredTemp15 [ ~[ $["+PRON" (?) "+3P" "+SG" "+FEM" ?* "+VROOT" "+SUBST" ?* "+EMPH" "+3P" "+SG" ["+MASC"|"+NEUT"]] ] .o. LEXfilteredTemp14 ] ;

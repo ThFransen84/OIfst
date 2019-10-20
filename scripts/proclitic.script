@@ -1,0 +1,50 @@
+#***** proclitic.script *****
+# Th. Fransen, 16/08/19
+
+echo >>> Opening 'proclitic.script' ...
+
+clear stack
+
+#\\\\\ DEFINE LEXICON /////
+
+echo >>> Reading in 'proclitic.lexc' ...
+read lexc < proclitic.lexc
+
+echo >>> Making flag diacritics two sided ...
+tfd
+
+define LEXproclitic ;
+
+#\\\\\ APPLY REPLACE RULES /////
+
+set flag-is-epsilon ON
+
+echo >>> Cleaning up initial +'s ...
+
+# invert lexicon as replace rules target lower level, invert afterwards  
+define LEX [LEXproclitic.i .o. "+" -> 0 || .#. _ ].i ;
+
+# Orthographic rules
+
+define vowCoalesc [
+["^PRONa" -> 0 || {ní} _ ] .o. 
+[Vow -> 0 ||  _ "^PRONa" ] .o. 
+["^PRONa" -> a]
+] ;
+
+define consOrth [
+"^M" -> m|{mm} .o.
+"^N" -> n|{nn}
+] ; 
+
+define orthRules [ vowCoalesc .o. consOrth ] ;
+
+echo >>> Applying lower-level rules ...
+regex [LEX .o. orthRules] ;
+
+set flag-is-epsilon OFF
+
+#\\\\\ DEFINE FINAL LEXICON AS VARIABLE /////
+
+echo >>> Defining final lexicon ...
+define LEXprocl

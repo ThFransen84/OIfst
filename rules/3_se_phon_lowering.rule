@@ -1,0 +1,10 @@
+#***** 3_se_phon_lowering.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# Lowering of stem vowel
+
+# lowering e.g. dep./conj. 1pl léicīm (m non-pal) > léicem, léicīa > léicea (subj. abs 1sg/conj 3sg)
+# this rule before palatalisation or else e.g. 1pl. léicīm > léic'īm' (m wrongly pal.) > **léicim.
+# ^V in rule context for subsequent optional syncope; e.g. prs. ind./subj. pass. 3pl. conj./abs. rel. léicī^V^Dər > léice^V^Dər
+# also secondary ending 3sg.
+regex [ ī -> e || _ [ ("^V") nonPalCons+ [ Vow | .#. | "-"] ] | a ] ;

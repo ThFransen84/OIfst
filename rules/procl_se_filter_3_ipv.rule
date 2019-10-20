@@ -1,0 +1,18 @@
+#***** procl_se_filter_3_ipv.rule *****
+# Th. Fransen, 20/08/19
+# Invoked as part of procl_se.script
+# Filter out proclitics (+ relative) incompatible with the imperative 
+
+regex [
+# No relative with the imperative
+~[ $["+REL" ?* "+IMP"] ] .o.
+
+# An imperative particle cannot go with anything other than an imperative form
+~[ $["+CONJ_PART" "+IMP" "+NEG"] &  ~$["+IMP" ("+PASS") "+CONJ"] ] .o.
+
+# No procl. prefixes other than the negative imperative particle or "no" with imperatives
+~[ $["+CONJ_PART"] & ~$["+IMP" "+NEG" | {no} "+CONJ_PART"] & $["+IMP" ("+PASS") "+CONJ"] ] .o.
+
+# Deuterotonic imperative form not allowed except when infixed pronoun present
+~[ $["+PV1" ?* "+PROCL_JUNCT"] & ~$["+PRON"] & $["+IMP" ("+PASS") "+CONJ"] ]
+] ;

@@ -1,0 +1,137 @@
+!***** tbf.lexc *****
+! Th. Fransen, 18/08/19
+! A selection of nouns, proper names, function words as well as defective "ol" taken from Táin Bó Fraích (Meid 1974)
+
+
+!\\\\\ DECLARE MULTICHAR SYMBOLS /////
+
+Multichar_Symbols
+
+! *UPPER symbols (Tags)*
+
++1P
++2P
++3P
++ACC
++ADV
++ART
++ACC
++CONJUNCTION
++DAT
++DEFECT
++FEM
++GEN
++H
++LEN
++MASC
++NAS
++NEUT
++NOM
++NOUN
++PART
++PL
++POSS
++PREP
++PRON
++PROP
++SG
++TEMP
++VERB
++VOC
+
+!\\\\\ BEGIN CONTINUATION CLASSES /////
+
+!*** Root = start ***
+
+LEXICON Root
+	Conjunction;
+	Article;
+	Preposition;
+	Proper;
+	Particle;
+	possPronoun;
+	Noun;
+	Adverb;
+	Verb;
+
+LEXICON Conjunction
+ocus+CONJUNCTION:&		#;
+
+LEXICON Article
+a+ART+NEUT+SG+ACC+NAS:a		#;
+a+ART+NEUT+SG+NOM+NAS:a		#;
+in+ART:in					#;
+in+ART+FEM+GEN+SG:na		#;
+in+ART+GEN+PL:na			#;
+
+LEXICON Preposition
+a+PREP+DAT:a						#;
+a+PREP+DAT+PRON+3P+SG+NEUT:ass		#;
+do+PREP+LEN:do						#;
+i+PREP+NAS:i						#;
+
+LEXICON Proper
+Aillil+PROP+NOUN+SG+GEN:Ailella			#;
+Aillil+PROP+NOUN+SG+ACC:Ailill			#;
+Aillil+PROP+NOUN+SG+DAT:Aillil			#;
+Aillil+PROP+NOUN+SG+NOM:Ailill			#;
+Boind+PROP+NOUN+SG+ACC:Bóind			#;
+Boind+PROP+NOUN+SG+DAT:Boind			#;
+Boind+PROP+NOUN+SG+NOM:Boind			#;
+Boind+PROP+NOUN+SG+GEN:Bóinni			#;
+Cernach+PROP+NOUN+ACC:Cernach			#;
+Cernach+PROP+NOUN+NOM:Cernach			#;
+Cernach+PROP+NOUN+GEN:Chernaig			#;
+Conall+PROP+NOUN+GEN:Conaill			#;
+Conall+PROP+NOUN+ACC:Conall				#;
+Conall+PROP+NOUN+NOM:Conall				#;
+Findabair+PROP+NOUN+ACC:Findabair		#;
+Findabair+PROP+NOUN+DAT:Findabair		#;
+Findabair+PROP+NOUN+NOM:Findabair		#;
+Findabair+PROP+NOUN+ACC:Finndabair		#;
+Findabair+PROP+NOUN+DAT:Finndabair		#;
+Findabair+PROP+NOUN+NOM:Finndabair		#;
+Fróech+PROP+NOUN+SG+NOM:Fráech			#;
+Fróech+PROP+NOUN+SG+GEN:Fraích			#;
+Fróech+PROP+NOUN+SG+ACC:Fróech			#;
+Fróech+PROP+NOUN+SG+NOM:Fróech			#;
+Ériu+GEN:Hérenn							#;
+Ériu+NOM:Hériu							#;
+Medb+PROP+NOUN+GEN:Medba				#;
+Medb+PROP+NOUN+NOM:Medb					#;
+Medb+PROP+NOUN+VOC:Medb					#;
+Medb+PROP+NOUN+ACC:Meidb				#;
+Medb+PROP+NOUN+DAT:Meidb				#;
+Fidach?+PROP+NOUN+GEN:Idaith 			#;
+
+LEXICON Particle
+PART+VOC+LEN:a	#;
+
+LEXICON possPronoun
+do+POSS+PRON+2P+SG+LEN:do			#;
+PRON+POSS+3P+SG+MASC+GEN+LEN:a		#;
+PRON+POSS+3P+SG+MASC+LEN:a			#;
+PRON+POSS+3P+SG+FEM+GEN+H:a			#;
+PRON+POSS+3P+SG+FEM+H:a				#;
+PRON+POSS+3P+SG+NEUT+GEN+LEN:a		#;
+PRON+POSS+3P+SG+NEUT+LEN:a			#;
+PRON+POSS+3P+PL+GEN+NAS:a			#;
+PRON+POSS+3P+PL+NAS:a				#;
+
+LEXICON Noun
+bó+NOUN+PL+GEN:bó		#;
+bó+NOUN+SG+NOM:bó		#;
+macc+PL+ACC:maccu		#;
+macc+PL+GEN:mac			#;
+macc+SG+NOM:mac			#;
+macc+PL+NOM:maicc		#;
+macc+SG+GEN:maicc		#;	
+macc+SG+GEN:maic		#;
+macc+PL+NOM:meicc		#;
+táin+NOUN+SG+NOM:táin	#;
+
+LEXICON Adverb
+íarum+ADV+TEMP:íarum	#;
+
+LEXICON Verb
+ol+VERB+DEFECT:ol	#;

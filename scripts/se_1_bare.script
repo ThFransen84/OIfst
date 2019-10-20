@@ -1,0 +1,99 @@
+#***** se_1_bare.script *****
+# Th. Fransen, 16/08/19
+# Initial mutations have not been added yet (hence "bare").
+
+echo >>> Opening 'se_1_bare.script' ...
+
+clear stack
+
+#\\\\\ DEFINE LEXICON /////
+
+echo >>> Reading in 'se.lexc' ...
+read lexc < se.lexc
+
+echo >>> Making flag diacritics two sided ...
+tfd
+
+echo >>> Eliminating W2a flag ...
+eliminate flag W2a
+
+define LEXunfiltered
+
+#\\\\\ APPLY RULES /////
+
+echo >>> Filtering ...
+source 1_se_filters.rule 	
+define RUL
+regex RUL .o. LEXunfiltered ;
+define LEXseLegal
+
+set flag-is-epsilon ON
+
+echo >>> Applying lower-level replace rules defining intermediate lexicons ...
+
+# Phonological rules
+
+source 2_se_phon_non_pres_stem_form.rule 	
+define RUL2
+define LEXseLower1 [LEXseLegal .o. RUL2] ;
+
+source 3_se_phon_lowering.rule 	
+define RUL3
+define LEXseLower2 [LEXseLower1 .o. RUL3] ;
+	
+source 4_se_phon_pal.rule 	
+define RUL4
+define LEXseLower3 [LEXseLower2 .o. RUL4] ;
+
+source 5_se_phon_del_stem_vow.rule
+define RUL5
+define LEXseLower4 [LEXseLower3 .o. RUL5] ;
+
+source 6_se_phon_syncope.rule 		
+define RUL6
+define LEXseLower5 [LEXseLower4 .o. RUL6] ;
+
+source 7_se_phon_cons_qual_assim.rule 		
+define RUL7
+define LEXseLower6 [LEXseLower5 .o. RUL7] ;
+
+source 8_se_phon_stem_vow.rule 		
+define RUL8
+define LEXseLower7 [LEXseLower6 .o. RUL8] ;
+
+# Orthographic rules
+
+source 9_se_orth_vow_pal_cons.rule	
+define RUL9
+define LEXseLower8 [LEXseLower7 .o. RUL9] ;
+
+source 10_se_orth_end_vow.rule 		
+define RUL10
+define LEXseLower9 [LEXseLower8 .o. RUL10] ;
+
+source 11_se_vow_emph.rule 		
+define RUL11
+define LEXseLower10 [LEXseLower9 .o. RUL11] ;
+
+source 12_se_del_pal_markers.rule 		
+define RUL12
+define LEXseLower11 [LEXseLower10 .o. RUL12] ;
+
+source 13_se_phon_orth_cons.rule 		
+define RUL13
+define LEXseLower12 [LEXseLower11 .o. RUL13] ;
+
+set flag-is-epsilon OFF
+
+echo >>> Apply priority union: robmmar > robammar ...
+regex [
+[
+$[{ro} "+AUG" "+" {bí} "+VROOT" "+SUBST" "+PRT" "+CONJ" "+1P" "+PL"] .o. LEXseLower12 .o. 
+[{robmmar} -> {robammar}]  
+] .P. LEXseLower12
+] ;
+
+#\\\\\ DEFINE FINAL LEXICON AS VARIABLE /////
+
+echo >>> Defining final lexicon ...
+define LEXseBare

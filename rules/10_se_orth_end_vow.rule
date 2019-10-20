@@ -1,0 +1,27 @@
+#***** 10_se_orth_end_vow.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# Vowel rewrite rules in post-tonic syllables
+
+# Open syllables
+
+regex [
+# e.g. marbtae (pres. 3pl. rel.)
+[ [..] -> a || nonPalCons _ [e|i] [.#. | "-" ] ] .o.	
+
+# e.g. mairbfea (fut.)
+[ [..] -> e || palCons _ a [ .#. | "-" ] ] .o.			
+
+# Closed syllables
+# schwa
+[ ə -> i 	|| palCons _ palCons ] 		.o.
+[ ə -> e 	|| palCons _ nonPalCons ] 	.o.
+[ ə -> {ai} || nonPalCons _ palCons ] 	.o.
+[ ə -> a 	|| nonPalCons _ nonPalCons ] 
+] .o.
+
+# Open and closed
+# palatal consonant + u
+# e.g. léicsu -> léicsiu (pret. 1sg. conj)
+# suff. pronouns such as léicthunn -> léicthiunn etc.
+[ [..] -> i || palCons _ u ] ;

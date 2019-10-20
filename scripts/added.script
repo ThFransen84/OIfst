@@ -1,0 +1,3 @@
+clear stack
+regex [@"new"] - [@"old"] ;
+save stack added

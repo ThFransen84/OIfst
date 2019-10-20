@@ -1,0 +1,19 @@
+#***** cap.script *****
+# Th. Fransen, 21/08/19
+# Capitalisation of initial letters
+
+echo >>> Opening 'cap.script' ...
+
+clear stack
+
+echo >>> Defining capitalisation rules ...
+
+define capRule [
+# No capitalisation double non-lenited anlaut consonants 
+[ l -> L || .#. _ \l ] .o. 
+[ m -> M || .#. _ \m ] .o. 
+[ n -> N || .#. _ \n ] .o. 
+[ r -> R || .#. _ \r ] .o. 
+
+[ b -> B , c -> C , d -> D , f -> F , g -> G , h -> H , l -> L ,p -> P , s -> S , t -> T , a -> A , á -> Á ,  e -> E , é -> É , i -> I , í -> Í , o -> O , ó -> Ó , u -> U , ú -> Ú , æ -> Æ , ǽ -> Ǽ || .#. _  ]
+] ;

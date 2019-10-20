@@ -1,0 +1,16 @@
+@R.PV.ARE@+āl+VROOT:ál												W2a;
+
+@R.PV.ARE@+sēt+VROOT:pett											W2a;
+
+@R.PV.TO@+lēc+VROOT:léic											W2a;
+@R.PV.TO@+ro+AUG+lēc+VROOT:reiləc									W2a;
+@D.PV@+to+PV1+lēc+VROOT:teiləc  									W2a;
+@D.PV@+to+PV1+ro+AUG+lēc+VROOT:tarələc								W2a;
+
+@R.PV.FO@+dāl+VROOT:dáil											W2a;
+@D.PV@+fo+PV1+dāl+VROOT:fodəl										W2a;
+
+@R.PV.FO@+ruim+VROOT:ruim											W2a;
+
+@R.PV.IMBI@+rād+VROOT:rád											W2a;
+@R.PV.IMBI@+ro+AUG+rād+VROOT:rorəd									W2a;

@@ -1,0 +1,202 @@
+!***** copula.lexc *****
+! Th. Fransen, 18/08/19
+
+!\\\\\ DECLARE MULTICHAR SYMBOLS /////
+
+Multichar_Symbols
+
+! *UPPER symbols (Tags)*
+
++
++1P
++2P
++3P
++ABS
++AUG
++COND
++CONJ
++CONJ_PART
++CONSUETUD
++COP
++DEPEND
++FUT
++IPF
++IMP
++IND
++LEN
++NEG
++PAST
++PL
++PRS
++REL
++SG
++SUBJ
++VROOT
+
+!\\\\\ BEGIN CONTINUATION CLASSES /////
+
+!*** Root = start ***
+
+LEXICON Root
+	Independent;
+	Prefix;
+
+LEXICON Independent
+	Present;
+	Imperative;
+	presSubj;
+	pastSubj;
+	Future;
+	Conditional;
+	Past;
+	
+LEXICON Prefix
+							Dependent;
+ní+CONJ_PART+NEG:ní			Dependent;
+							depImp;
+ná+CONJ_PART+IMP+NEG:ná		depImp;
+	
+LEXICON Dependent
+	depPres;
+	depCons;
+	depPresSubj;
+	depPastSubj;
+	depFut;
+	depCond;
+	depPast;
+	
+LEXICON Present
+is+VROOT+COP+PRS+IND+1P+SG:am			#;
+is+VROOT+COP+PRS+IND+2P+SG:at			#;
+is+VROOT+COP+PRS+IND+2P+SG:it			#;
+is+VROOT+COP+PRS+IND+3P+SG:is			#;
+is+VROOT+COP+PRS+IND+3P+SG+REL:as		#;
+is+VROOT+COP+PRS+IND+1P+PL:ammi			#;
+is+VROOT+COP+PRS+IND+1P+PL:ammin		#;
+is+VROOT+COP+PRS+IND+2P+PL:adi			#;
+is+VROOT+COP+PRS+IND+2P+PL:adib			#;
+is+VROOT+COP+PRS+IND+3P+PL:it			#;
+is+VROOT+COP+PRS+IND+3P+PL+REL:ata		#; 
+is+VROOT+COP+PRS+IND+3P+PL+REL:at		#; 
+
+LEXICON Imperative
+bí+VROOT+COP+IMP+2P+SG+LEN:ba		#;
+bí+VROOT+COP+IMP+3P+SG+LEN:bed		#;
+bí+VROOT+COP+IMP+3P+SG+LEN:bad		#;
+bí+VROOT+COP+IMP+1P+PL+LEN:baan		#;
+bí+VROOT+COP+IMP+1P+PL+LEN:ban		#;
+bí+VROOT+COP+IMP+2P+PL+LEN:bed		#;
+bí+VROOT+COP+IMP+2P+PL+LEN:bad		#;
+bí+VROOT+COP+IMP+3P+PL+LEN:bat		#;
+
+LEXICON presSubj
+bí+VROOT+COP+PRS+SUBJ+1P+SG:ba				#;
+bí+VROOT+COP+PRS+SUBJ+2P+SG:ba				#;
+bí+VROOT+COP+PRS+SUBJ+2P+SG:be				#;
+bí+VROOT+COP+PRS+SUBJ+3P+SG:ba				#;
+bí+VROOT+COP+PRS+SUBJ+3P+SG+REL:bes			#;
+bí+VROOT+COP+PRS+SUBJ+3P+SG+REL:bas			#;
+bí+VROOT+COP+PRS+SUBJ+2P+PL:bede			#;
+bí+VROOT+COP+PRS+SUBJ+3P+PL+REL+LEN:bete	#;
+bí+VROOT+COP+PRS+SUBJ+3P+PL+REL+LEN:beta	#;
+
+LEXICON pastSubj
+bí+VROOT+COP+PAST+SUBJ+3P+SG+LEN:bed			#;
+bí+VROOT+COP+PAST+SUBJ+3P+SG+LEN:bad			#;
+bí+VROOT+COP+PAST+SUBJ+3P+SG+LEN:bid			#;
+bí+VROOT+COP+PAST+SUBJ+1P+PL:bemmis				#;
+bí+VROOT+COP+PAST+SUBJ+3P+PL:betis				#;
+bí+VROOT+COP+PAST+SUBJ+3P+PL:bitis				#;
+ro+AUG+DEPEND+bí+VROOT+COP+COND+3P+PL:roptis	#;
+
+LEXICON Future
+bí+VROOT+COP+FUT+1P+SG:be				#;
+bí+VROOT+COP+FUT+2P+SG:be				#;
+bí+VROOT+COP+FUT+3P+SG:bid				#;
+bí+VROOT+COP+FUT+3P+SG+REL+LEN:bes		#;
+bí+VROOT+COP+FUT+3P+SG+REL+LEN:bas		#;
+bí+VROOT+COP+FUT+1P+PL:bimmi			#;
+bí+VROOT+COP+FUT+1P+PL:bemmi			#;
+bí+VROOT+COP+FUT+3P+PL:bit				#;
+bí+VROOT+COP+FUT+3P+PL+REL+LEN:beta		#;
+bí+VROOT+COP+FUT+3P+PL+REL+LEN:bat		#;
+
+LEXICON Conditional
+bí+VROOT+COP+COND+3P+SG+LEN:bed		#;
+bí+VROOT+COP+COND+3P+PL:beitis		#;
+
+LEXICON Past
+bí+VROOT+COP+PAST+1P+SG:basa	#;
+bí+VROOT+COP+PAST+3P+SG:ba		#;
+bí+VROOT+COP+PAST+3P+PL:batir	#;
+bí+VROOT+COP+PAST+3P+PL:batar	#;
+
+ro+AUG+DEPEND+bí+VROOT+COP+PAST+1P+SG:ro-bsa			#;
+ro+AUG+DEPEND+bí+VROOT+COP+PAST+2P+SG:ro-psa			#;
+ro+AUG+DEPEND+bí+VROOT+COP+PRS+IND+3P+SG+LEN:ro-po		#;
+ro+AUG+DEPEND+bí+VROOT+COP+PRS+IND+3P+SG+LEN:ro-bo		#;
+ro+AUG+DEPEND+bí+VROOT+COP+PRS+IND+3P+SG+LEN:ro-pu		#;
+ro+AUG+DEPEND+bí+VROOT+COP+PRS+IND+3P+SG+LEN:ro-bu		#;
+ro+AUG+DEPEND+bí+VROOT+COP+PAST+3P+PL:ro-bummar			#;
+ro+AUG+DEPEND+bí+VROOT+COP+PAST+3P+PL:ro-ptar			#;
+
+LEXICON depPres
++DEPEND+tá+VROOT+COP+PRS+IND+1P+SG+LEN:-ta		#;
++DEPEND+tá+VROOT+COP+PRS+IND+1P+SG+LEN:-da		#;
++DEPEND+tá+VROOT+COP+PRS+IND+2P+SG+LEN:-ta		#;
++DEPEND+tá+VROOT+COP+PRS+IND+2P+SG+LEN:-da		#;
++DEPEND+tá+VROOT+COP+PRS+IND+1P+PL+LEN:-tan		#;
++DEPEND+tá+VROOT+COP+PRS+IND+1P+PL+LEN:-dan		#;
++DEPEND+tá+VROOT+COP+PRS+IND+2P+PL+LEN:-tad		#;
++DEPEND+tá+VROOT+COP+PRS+IND+2P+PL+LEN:-dad		#;
++DEPEND+tá+VROOT+COP+PRS+IND+3P+PL+LEN:-tat		#;
++DEPEND+tá+VROOT+COP+PRS+IND+3P+PL+LEN:-dat		#;
+
+LEXICON depImp
++DEPEND+bí+VROOT+COP+IMP+3P+SG+LEN:-bad		#;
++DEPEND+bí+VROOT+COP+IMP+2P+PL+LEN:-bad		#;
++DEPEND+bí+VROOT+COP+IMP+3P+PL+LEN:-bat		#;
+
+LEXICON depCons
++DEPEND+bí+VROOT+COP+PRS+IND+CONSUETUD+3P+SG:-bi	#;
++DEPEND+bí+VROOT+COP+PRS+IND+CONSUETUD+3P+SG:-pi	#;
+
+LEXICON depPresSubj
++DEPEND+bí+VROOT+COP+PRS+SUBJ+1P+SG+LEN:-ba		#;
++DEPEND+bí+VROOT+COP+PRS+SUBJ+2P+SG:-ba			#;
++DEPEND+bí+VROOT+COP+PRS+SUBJ+1P+PL:-ban		#;
++DEPEND+bí+VROOT+COP+PRS+SUBJ+2P+PL:-bad		#;
++DEPEND+bí+VROOT+COP+PRS+SUBJ+3P+PL+LEN:-pat	#;
++DEPEND+bí+VROOT+COP+PRS+SUBJ+3P+PL+LEN:-bat	#;
+
+LEXICON depPastSubj
++DEPEND+bí+VROOT+COP+PAST+SUBJ+1P+SG:-benn		#;
++DEPEND+bí+VROOT+COP+PAST+SUBJ+1P+SG:-bin		#;
++DEPEND+bí+VROOT+COP+PAST+SUBJ+2P+SG:-ptha		#;
++DEPEND+bí+VROOT+COP+PAST+SUBJ+3P+SG+LEN:-bed	#;
++DEPEND+bí+VROOT+COP+PAST+SUBJ+3P+SG+LEN:-bad	#;
++DEPEND+bí+VROOT+COP+PAST+SUBJ+1P+PL:-bimmis	#;
++DEPEND+bí+VROOT+COP+PAST+SUBJ+3P+PL:-btis		#;
++DEPEND+bí+VROOT+COP+PAST+SUBJ+3P+PL:-ptis		#;
+
+LEXICON depFut
++DEPEND+bí+VROOT+COP+FUT+3P+SG:-ba		#;
++DEPEND+bí+VROOT+COP+FUT+3P+SG:-pa		#;
++DEPEND+bí+VROOT+COP+FUT+3P+PL:-bat		#;
+
+LEXICON depCond
++DEPEND+bí+VROOT+COP+COND+3P+SG+LEN:-bad	#;
+
+LEXICON depPast
++DEPEND+bí+VROOT+COP+PAST+1P+SG:-psa		#;
++DEPEND+bí+VROOT+COP+PAST+3P+SG+LEN:-bu		#;
++DEPEND+bí+VROOT+COP+PAST+3P+SG+LEN:-pu		#;
++DEPEND+bí+VROOT+COP+PAST+3P+SG+LEN:-bo		#;
++DEPEND+bí+VROOT+COP+PAST+3P+SG+LEN:-po		#;
++DEPEND+bí+VROOT+COP+PAST+3P+PL:-btar		#;
+
++DEPEND+ro+AUG+bí+VROOT+COP+PAST+1P+SG:-rbsa		#;
++DEPEND+ro+AUG+bí+VROOT+COP+PAST+3P+SG+LEN:-rbo		#;
++DEPEND+ro+AUG+bí+VROOT+COP+PAST+3P+SG+LEN:-rbu		#;
++DEPEND+ro+AUG+bí+VROOT+COP+PAST+1P+PL:-rbommar		#;
++DEPEND+ro+AUG+bí+VROOT+COP+PAST+3P+PL:-rbtar		#;

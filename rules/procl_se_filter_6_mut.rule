@@ -1,0 +1,15 @@
+# ***** procl_se_filter_6_mut.rule
+# Th. Fransen, 21/08/19
+# Invoked as part of procl_se.script
+# Filter out incompatible mutation tags
+# Disallow non-matching mutation tags but also the absence of a mutation tag on either side of the procl. juncture, e.g. ro+AUG+PROCL_JUNCT+LEN+bris+VROOT... and ro+AUG+REL+NAS+PROCL_JUNCT+bris+VROOT...
+# Note also *AD+PV1+PROCL_JUNCT+LEN+tá:at·thá (no inf. pronoun/relative possible and, consequently, mutations on tá impossible).
+
+regex [
+~[ $["+LEN" "+PROCL_JUNCT" \["+LEN"] ] ] .o.
+~[ $["+NAS" "+PROCL_JUNCT" \["+NAS"] ] ] .o.
+~[ $["+H" "+PROCL_JUNCT" \["+H"] ] ] .o.
+~[ $[\["+LEN"] "+PROCL_JUNCT" "+LEN"] ] .o.  
+~[ $[\["+NAS"] "+PROCL_JUNCT" "+NAS"] ] .o.
+~[ $[\["+H"] "+PROCL_JUNCT" "+H"] ]
+] ;

@@ -1,0 +1,240 @@
+!***** proclitic.lexc *****
+! Th. Fransen, 13/08/19
+
+!\\\\\ DECLARE MULTICHAR SYMBOLS /////
+
+Multichar_Symbols
+
+! *UPPER symbols (Tags)*
+
++
++A
++B
++C
++1P
++2P
++3P
++AUG
++FEM
++H
++IMP
++INTERR
++LEN
++MASC
++NAS
++NEG
++NEUT
++CONJ_PART
++PL
++PRON
++PV1
++REL
++SG
+
+! *LOWER symbols (Triggers)*
+
+^M
+^N
+^PRONa
+
+! *Flags*
+
+@P.PART.NO@
+@P.PV.AD@
+@P.PV.ARE@
+@P.PV.COM@
+@P.PV.FO@
+@P.PV.IMBI@
+@P.PV.TO@
+@P.PV.SV@	! substantive verb
+
+!\\\\\ BEGIN CONTINUATION CLASSES /////
+
+!*** Root = start ***
+
+LEXICON Root
+				Preverb;
+				conjPart;
+@P.PART.NO@		No;
+				Ro;
+				
+!*** Preverbs ***
+	
+LEXICON Preverb
+@P.PV.AD@			AD;
+@P.PV.ARE@			ARE;
+@P.PV.COM@			COM;
+@P.PV.FO@			FO;
+@P.PV.IMBI@			IMBI;
+@P.PV.TO@			TO;
+@P.PV.SV@ad+PV1:at	#;	! substantive verb
+
+LEXICON AD
+ad+PV1:ad			#;
+ad+PV1:at			pronB;
+ad+PV1+REL+LEN:ad	#;
+ad+PV1+REL+NAS:ad	#;
+ad+PV1+REL+LEN:a	pronC;
+ad+PV1+REL+NAS:an	pronC;
+
+LEXICON ARE
+are+PV1:ar				#;
+are+PV1:aru				pronA;
+are+PV1:aro				pronA;
+are+PV1:ari				pronA;
+are+PV1:ara				pronA;
+are+PV1+REL+LEN:ara		#;
+are+PV1+REL+NAS:ara		#;
+are+PV1+REL+LEN:ar		pronC;
+are+PV1+REL+NAS:aran	pronC;
+
+LEXICON COM
+com+PV1:con				#;
+com+PV1:cot				pronB;
+com+PV1+REL+LEN:con		#;
+com+PV1+REL+NAS:con		#;
+com+PV1+REL+LEN:co		pronC;
+com+PV1+REL+NAS:con		pronC;
+	
+LEXICON FO
+fo+PV1:fo			#;
+fo+PV1:fo			pronA;
+fo+PV1+REL+LEN:fo	#;
+fo+PV1+REL+NAS:fo	#;
+fo+PV1+REL+LEN:fo	pronC;
+fo+PV1+REL+NAS:fon	pronC;
+
+LEXICON IMBI
+imbi+PV1:i^M				#;
+imbi+PV1:i^Mu				pronA;
+imbi+PV1:i^Mi				pronA;
+imbi+PV1+REL+LEN:i^Me		#;
+imbi+PV1+REL+NAS:i^Me		#;
+imbi+PV1+REL+LEN:i^Mu		pronC;
+imbi+PV1+REL+LEN:i^Mi		pronC;
+imbi+PV1+REL+NAS:i^Mun		pronC;
+imbi+PV1+REL+NAS:i^Min		pronC;
+
+LEXICON TO
+to+PV1:do			#;
+to+PV1:do			pronA;
+to+PV1+REL+LEN:do	#;
+to+PV1+REL+NAS:do	#;
+to+PV1+REL+LEN:do	pronC;
+to+PV1+REL+NAS:don	pronC;
+
+!*** Conjunct particles ***
+
+LEXICON conjPart
+ní+CONJ_PART+NEG:ní		#;
+ní+CONJ_PART+NEG:ní		pronA;
+ní+CONJ_PART+NEG:ní		roNonRel;
+
+ná+CONJ_PART+IMP+NEG:ná								#;
+ná+CONJ_PART+IMP+NEG:nach							pronNach;
+ná+CONJ_PART+IMP+NEG+PRON+B+3P+SG+NEUT+LEN:nadid	#;
+
+in+CONJ_PART+INTERR+NAS:in	#;
+in+CONJ_PART+INTERR:in		pronC;
+in+CONJ_PART+INTERR:in		roNonRel;
+
+nád+CONJ_PART+INTERR+NEG:nád							#;
+nád+CONJ_PART+INTERR+NEG:ná								roNonRel;
+nád+CONJ_PART+INTERR+NEG+PRON+C+3P+SG+NEUT+LEN:nadid	#;
+nád+CONJ_PART+INTERR+NEG:innach							pronNach;
+
+nád+CONJ_PART+REL+NEG+LEN:nád						#;
+nád+CONJ_PART+REL+NEG+NAS:nád						#;
+nád+CONJ_PART+REL+NEG:ná							roRel;
+nád+CONJ_PART+REL+NEG:nach							pronNach;
+nád+CONJ_PART+REL+NEG+PRON+C+3P+SG+NEUT+LEN:nadid	#;
+
+!*** No ***
+
+LEXICON No
+no+CONJ_PART:no				#;	
+no+CONJ_PART+REL+LEN:no		#;
+no+CONJ_PART+REL+NAS:no		#;
+no+CONJ_PART:no				pronA;
+no+CONJ_PART+REL+LEN:no		pronC;
+no+CONJ_PART+REL+NAS:non	pronC;
+
+!*** Ro ***
+
+LEXICON Ro
+	roNonRel;
+	roRel;
+
+LEXICON roNonRel
++ro+AUG:ro	#;
++ro+AUG:ro	pronA;
+
+LEXICON roRel
++ro+AUG+REL+LEN:ro		#;
++ro+AUG+REL+NAS:ro		#;
++ro+AUG+REL+LEN:ro		pronC;
++ro+AUG+REL+NAS:ron		pronC;
+
+!\\\\\ INFIXED PRONOUNS /////
+
+LEXICON pronA
++PRON+A+1P+SG+LEN:^M			#; 	
++PRON+A+2P+SG+LEN:t				#;	
++PRON+A+3P+SG+MASC+NAS:^PRONa	#;
++PRON+A+3P+SG+FEM:s				#;
++PRON+A+3P+SG+FEM+NAS:s			#;
++PRON+A+3P+SG+NEUT+LEN:^PRONa	#;
++PRON+A+1P+PL:^N				#; 
++PRON+A+2P+PL:b					#; 
++PRON+A+3P+PL:s					#;
++PRON+A+3P+PL+NAS:s				#;
+
+LEXICON pronB
++PRON+B+1P+SG+LEN:om		#; 
++PRON+B+1P+SG+LEN:um		#;
++PRON+B+1P+SG+LEN:am		#;
++PRON+B+1P+SG+LEN:amm		#;
++PRON+B+2P+SG+LEN:ot		#;			
++PRON+B+2P+SG+LEN:at		#;
++PRON+B+2P+SG+LEN:0			#;
++PRON+B+3P+SG+MASC+NAS:0	#;
++PRON+B+3P+SG+MASC+NAS:a	#;
++PRON+B+3P+SG+FEM+H:a		#;
++PRON+B+3P+SG+NEUT+LEN:0	#;
++PRON+B+1P+PL:an			#;
++PRON+B+1P+PL:ann			#;
++PRON+B+2P+PL:ob			#; 
++PRON+B+2P+PL:ab			#; 
++PRON+B+3P+PL+H:a			#;
+
+LEXICON pronC
++PRON+C+1P+SG+LEN:dom		#; 
++PRON+C+1P+SG+LEN:dum		#; 
++PRON+C+1P+SG+LEN:dam		#;
++PRON+C+1P+SG+LEN:damm		#; 
++PRON+C+2P+SG+LEN:dat		#;			
++PRON+C+2P+SG+LEN:dit		#;	
++PRON+C+3P+SG+FEM+H:da		#;
++PRON+C+1P+PL:don			#;
++PRON+C+1P+PL:dun			#;
++PRON+C+1P+PL:din			#; 
++PRON+C+1P+PL:dan			#;
++PRON+C+1P+PL:dann			#;
++PRON+C+2P+PL:dob			#;
++PRON+C+2P+PL:dub			#;
++PRON+C+2P+PL:dib			#;
++PRON+C+2P+PL:dab			#;
++PRON+C+3P+PL+H:da			#;
+	
+LEXICON pronNach 
++PRON+1P+SG+LEN:am			#;
++PRON+1P+SG+LEN:im			#;
++PRON+2P+SG+LEN:at			#;
++PRON+2P+SG+LEN:it			#;
++PRON+3P+SG+MASC+NAS:		#;
++PRON+3P+SG+FEM+H:a			#;
++PRON+3P+SG+NEUT+LEN:		#;
++PRON+3P+SG+NEUT+LEN:id		#;
++PRON+1P+PL:an				#;
++PRON+2P+PL:ab				#;
++PRON+3P+PL+H:a				#;

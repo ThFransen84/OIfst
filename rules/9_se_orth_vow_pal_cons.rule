@@ -1,0 +1,7 @@
+#***** 9_se_orth_vow_pal_cons.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# "i" after back vowel/e/é and pal. consonant
+
+# e.g. ad-elliub > ad-eilliub
+regex [ [..] -> i || backVow|e|é _ palCons ] ;

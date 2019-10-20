@@ -1,0 +1,11 @@
++aisic+VROOT:aisic					W2a;
+
++bris+VROOT:bris					W2a;
+
++glúais+VROOT:glúais				W2a;
+
++lēc+VROOT:léic						W2a;
++ro+AUG+lēc+VROOT:reiləc			W2a;
+
++rād+VROOT:rád						W2a;
++ro+AUG+rād+VROOT:rorəd				W2a;

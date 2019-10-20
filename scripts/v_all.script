@@ -1,0 +1,84 @@
+#***** v_all.script *****
+# Th. Fransen, 21/08/19
+# Create subsets of verb lexicons and load in full-form copula lexicon
+# Add deuterotonic tags and perform capitalisation of initials on subsets
+# Union all transducers
+
+echo >>> Opening 'v_all.script' ...
+
+clear stack
+
+#\\\\\ CREATE DEUT. VS NON-DEUT. INFLECTION LEXICON AND ADD DEUT. TAGS /////
+
+echo >>> Creating deuterotonic lexicon, adding tag ...
+# add DEUT to the subset of conjunct forms that do not have the @D.PV@. flag, i.e. @R.PV.X@ flag, i.e. deuterotonic
+define LEXdeutWithMut ["DEUT":0 [ ~$["@D.PV@"] .o. LEXseConjWithMut] ] ;
+
+echo >>> Creating simple and prototonic lexicon ... 
+# Define a conjunct lexicon only containing simplexes and protot. forms by subtracting the deuterotonic subset (see above) 
+define LEXconjSimplePrototWithMut [ LEXseConjWithMut - [ ~$["@D.PV@"] .o. LEXseConjWithMut ] ] ;
+
+#\\\\\ REWRITE UPPER STRINGS TO GET RID OF INITIAL "+" (EXCLUSIVELY WITH SIMPLEX CONJUNCT AND PROTOTONIC FORMS) /////
+
+set flag-is-epsilon ON
+
+echo >>>  Deleting initial +'s ...
+# invert lexicon as replace rules target lower level, invert afterwards
+define LEXconjSimplePrototWithMutClean [
+LEXconjSimplePrototWithMut.i .o.
+["+" -> 0 , "+LEN" -> "LEN" , "+NAS" -> "NAS" , "+H" -> "H" || .#. _ ] 
+].i ; 
+
+#\\\\\ CAPITALISATION OF INITIALS WITH RESTRICTED FORMS /////
+
+echo >>> Defining lexicons for capitalisation ...
+
+# Imperative
+
+source v_all_cap_filter_imp.rule
+define capFilterImpRule
+define LEXimpForCap [ capFilterImpRule .o. LEXconjSimplePrototWithMutClean ] ;
+
+# Non-relative
+
+# Derivates of se.lexc (se_x_y.script files) or a product of proclitic.script / procl_se.script
+define LEXnonRelforCap [ ~$["+REL"] .o. [LEXabsWithNasRelClean | LEXprocl | LEXproclSE] ] ;
+
+# Copula
+
+echo >>> Reading in 'copula.lexc' ...
+read lexc < copula.lexc
+define LEXcopula
+
+# Only non-depend. copula forms (preceded by a conj. part. or aug. or not containing "+DEPEND") can be capitalised
+define LEXcopulaForCap [ [ $["+CONJ_PART"|"+AUG" "+DEPEND"] | ~$"+DEPEND" ] .o. LEXcopula ] ;
+
+echo >>> Unioning lexicons for capitalisation ...
+define LEXforCap [ LEXimpForCap | LEXnonRelforCap | LEXcopulaForCap ] ;
+
+echo >>> Capitalisation ...
+define LEXcaps [LEXforCap .o. capRule] ;
+
+set flag-is-epsilon OFF
+
+#\\\\\ UNION TRANSDUCERS /////
+
+echo >>> Unioning final lexicons ...
+regex [
+[
+LEXabsWithNasRelClean |
+LEXdeutWithMut.f | 
+# remove flag eliminator if analysis non-consecutive deut. stems not desired
+
+LEXconjSimplePrototWithMutClean |
+LEXprocl |
+LEXproclSE |
+LEXcopula |
+LEXcaps 
+]
+.o. · (->) "-" .o. "-" (->) 0
+] ;
+
+echo >>> Saving stack to file ...
+# Save Old Irish verbs transducer
+save stack oiv.fst

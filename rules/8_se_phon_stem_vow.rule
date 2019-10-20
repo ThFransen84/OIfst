@@ -1,0 +1,25 @@
+#***** 8_se_phon_stem_vow.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# Vowel rewrite rules as part of the stem
+
+regex [
+# create more fine-grained rules later with pal./ non.pal (<sync) and a/i + F-future stem cons.
+[i -> {ai} || nonPalCons _ "^F" ] .o.  
+[ā -> 0 || palCons _ i ] .o.
+
+# e.g. protot. ad'll'ā^M' > aidlim, ad'l'l'ā^F'e > aidlibe
+[ā -> i || palCons _ palCons ] .o.
+
+# e.g. ad'l'l'āθ > aidled, ad'l'l'ā^Sət> **aidlesat (= adallsat)
+[ā -> e || palCons _ nonPalCons ] .o.
+[ā -> {ea} || palCons _ ] .o.
+
+# e.g. 3pl. rel. marbaite 
+[ [..] -> i || ā _ palCons ] .o.		
+[ā -> a ] .o.
+[ī -> a || nonPalCons _ nonPalCons ] .o.
+
+# e.g. l'éic'ī-s'
+[ī -> i]   
+] ;

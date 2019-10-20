@@ -1,0 +1,12 @@
+@R.PV.AD@+ell+VROOT:ell												W1;
+@D.PV@+ad+PV1+ell+VROOT:adell										W1;
+
+@R.PV.TO@+ell+VROOT:all												W1;
+@D.PV@+to+PV1+ell+VROOT:tall										W1;
+
+@R.PV.TO@+imbi+PV2+cell+VROOT:i^Məchell								W1;
+@D.PV@+to+PV1+imbi+PV2+cell+VROOT:ti^Məchell						W1;
+
+@R.PV.FO@+fer+VROOT:fer												W1;
+
+@R.PV.IMBI@+múch+VROOT:múch											W1;

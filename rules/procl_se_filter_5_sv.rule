@@ -1,0 +1,33 @@
+#***** procl_se_filter_5_sv.rule
+# Th. Fransen, 20/08/19
+# Invoked as part of procl_se.script
+# Filter out tags incompatible with the substantive verb
+# GOI 476--483
+
+regex [
+# Pronouns are not allowed with impersonals
+~[ $[ ["+CONJ_PART"|"+AUG"] ?* ["+PRON"] ?* [{tá}|{bí}] "+VROOT" "+SUBST" ?* "+IMPERS"]] .o.
+
+# e.g. at·taam but **ní·taam (nín·fil), only dependent ·tá exists (but see next restriction)
+~[ $["+CONJ_PART" ?* {tá} "+VROOT" "+SUBST"] & ~$["+CONJ" "+3P" "+SG"] ] .o.
+
+# ·tá, when preceded by a conj. part., needs (dative) pronoun (**ní·tá).
+# currently nom·tá etc allowed (alongside táthum)
+# Currently e.g. no(n)dom·t(h)á (rel. ) ''that I have'' allowed but check grammaticality len./nas. relative in the context of subject/obj. antecedent
+
+~[ $["+CONJ_PART" ?* {tá} "+VROOT" "+SUBST"] & ~$["+PRON"]
+] .o.
+
+# 'fil' (3sg) can occur without infix.pron., e.g. ní·fil 'there is not' in contrast to dependent **ní·tá, so different restrictions.
+# Non-rel constructions like nom·fil 'I am' etc not possible -> independ. at·táu etc (but e.g. ním·fil ''I am not'')
+# Relative fil(e) e.g. **noda·fil > fil(e) 'that she is' taken care of in 'procl_se_filter_no.rule' which states that the person/number of the infixed pron. may not appear with 'no' if there already is a special absolute relative ending.
+# Also: only a leniting relative clause possible with fil
+
+~[ $[ {no} "+CONJ_PART" ?* {fil} "+VROOT" "+SUBST"] & ~$["+REL"] ] .o. 
+~[ $[ "+REL" "+NAS" ?* {fil} "+VROOT" "+SUBST"] ] .o. 
+
+# Bí allows the augment and the only restriction here is its conj. forms. It's like a passive in that the 3rd sg. ending with an infix is used as a dative (is to X). So without an infix all endings are allowed, but with a dative infix only 3sg. ending.
+# e.g. ní·boí '(he/she) was, ním·boí 'I had', ní·bámmar 'we were not', but NOT e.g. **ním·bámmar 
+
+~[ $[ ["+CONJ_PART"| "+AUG"] ?* "+PRON" ?* {bí} "+VROOT" "+SUBST"] & ~$["+CONJ" "+3P" "+SG"] ]
+] ;

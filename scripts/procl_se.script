@@ -1,0 +1,64 @@
+#***** procl_se.script *****
+# Th. Fransen, 20/08/19
+# Combine variables derived from proclitic.lexc (proclitic.script) and se.lexc (se_3_mut.script)
+
+echo >>> Opening 'procl_se.script' ...
+
+clear stack
+
+#\\\\\ DEFINE UNFILTERED LEXICON /////
+
+echo >>> Concatenating variables 'LEXprocl' · 'LEXseConjWithMut' ...
+define LEXunfiltered [LEXprocl "+PROCL_JUNCT":· LEXseConjWithMut ] ;
+
+#\\\\\ APPLY UPPER-LEVEL FILTER RULES /////
+
+source procl_se_filter_1_aug.rule	
+define proclSEfilter1 ;
+
+source procl_se_filter_2_no.rule	
+define proclSEfilter2 ;
+
+source procl_se_filter_3_ipv.rule	
+define proclSEfilter3 ;
+
+source procl_se_filter_4_pass.rule	
+define proclSEfilter4 ;
+
+source procl_se_filter_5_sv.rule	
+define proclSEfilter5 ;
+
+source procl_se_filter_6_mut.rule
+define proclSEfilter6 ;
+
+define proclSEfilters [proclSEfilter1 .o. proclSEfilter2 .o. proclSEfilter3 .o. proclSEfilter4 .o. proclSEfilter5 .o. proclSEfilter6 ] ;
+
+echo >>> Filtering ...
+define LEXfilteredTemp1 [proclSEfilters .o. LEXunfiltered] ;
+
+echo >>> More filtering and defining intermediate lexicons ...
+# Intermediate lexicons: LEXfilteredTemp2-15
+source procl_se_filter_7_emph.rule
+push LEXfilteredTemp15
+
+define LEXproclSElegal
+
+#\\\\\ DELETE PROCLITIC MUTATION TAGS /////
+
+set flag-is-epsilon ON
+
+echo >>> Deleting mirroring mutation tags before +PROCL_JUNCT ...
+# invert lexicon as replace rules target lower level, invert afterwards
+regex [
+LEXproclSElegal.i .o. 
+["+NAS" -> 0 || _ "+PROCL_JUNCT" "+NAS"] .o.
+["+LEN" -> 0 || _ "+PROCL_JUNCT" "+LEN"] .o.
+["+H" -> 0 || _ "+PROCL_JUNCT" "+H"]
+].i ; 
+
+set flag-is-epsilon OFF
+
+#\\\\\ DEFINE FINAL LEXICON AS VARIABLE /////
+
+echo >>> Defining final lexicon ...
+define LEXproclSE

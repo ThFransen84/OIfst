@@ -1,0 +1,13 @@
+#***** 11_se_vow_emph.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# Rewrite abstract vowel symbols with emph. particles
+
+regex [
+# palatal
+[ "^Vemph1SG" -> e (a) , "^Vemph2SG" -> {iu}  , "^Vemph3P" -> e (o) | {iu} || [ frontVow | palCons ] "-" s _ ] .o. 
+
+# non-palatal
+[ "^Vemph1SG" -> a , "^Vemph2SG" -> o|u , "^Vemph3P" -> a|o
+|| [ backVow | nonPalCons ] "-" s _ ]
+] ;

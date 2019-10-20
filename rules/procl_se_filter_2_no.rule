@@ -1,0 +1,15 @@
+#***** procl_se_filter_2_no.rule *****
+# Th. Fransen, 20/08/19
+# Invoked as part of procl_se.script
+# Filter out tags incompatible with "no"
+
+regex [
+# e.g. **no·reilic
+~[ $[ {no} "+CONJ_PART" ?* "+AUG" ] ] .o.
+
+# "No" (non-rel.) without inf. pronoun only with secondary endings (i.e. not with tenses/moods below)
+~[ $[{no} "+CONJ_PART"] & ~$["+REL"] & ~$["+PRON"] & $["+PRS"|"+IMP"|"+FUT"|"+PRT"] ] .o.
+
+# Relative "no" forms WITHOUT inf. pron. are restricted to those person/number forms that do not have a special absolute rel., e.g. prs. ind. 1pl. rel. **no·léicem (> léicme), but 1pl. secondary end. (invariably conj.) no·léic(fi)mis (both main and relative)
+~[ $[{no} "+CONJ_PART" ?* "+REL"] & ~$["+PRON"] & $["+CONJ" ["+3P" | "+1P" "+PL"] ] & $["+PRS"|"+IMP"|"+FUT"|"+PRT"] ]
+] ;

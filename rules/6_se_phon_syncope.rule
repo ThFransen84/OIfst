@@ -1,0 +1,36 @@
+#***** 6_se_phon_syncope.rule *****
+# Th. Fransen, 16/08/19
+# Invoked as part of se_1_bare.script
+# Syncope
+
+# mark syncope
+regex [ 
+Vow+ @-> "[" ... "]" || 
+.#. Cons* [ Vow+ Cons+ 		| 
+		  [Vow+ Cons+]^3 	| 
+		  [Vow+ Cons+]^5 ] _ Cons+ Vow
+] .o.
+
+# phonotactic exceptions on syncope
+# some consonants have (underlying) symbols!
+# ·ro-m[a]rb-     (mrb)
+# ·ad-r[o-e]ll- (drl), roibr[i]ssimm (brs) (hypothethical; not part of current FST) 
+[ "[" -> 0 , "]" -> 0 || 
+_ (Vow+ "]") r (') Cons , 
+Cons r (') ("[" Vow+) _ (Vow+ "]") [l|s|"^S"]   
+] .o.
+
+# optional syncope with e.g. abs. rel. 3pl. using ^V
+# e.g. prs. ind. 3pl. rel. marb[ā^V]^D'e AND marb[ā^V^D'e
+# Rule context with preceding Vow does not interfere with f-future (taking a- and pass1 endings), e.g. marb[ā]^F^V^D'e
+[ "]" (->) 0 || "[" Vow "^V" _ ] .o.
+["^V" -> 0 || Vow _ ] .o.
+["^V" -> ə ] .o. 
+
+# delete syncope markers
+# e.g. marb[ā]^D'e > marb^D'e
+[ "[" Vow+ "]" -> 0 ]  .o.
+
+# delete "[" with optional syncope which has remained up until now
+# e.g. marb[ā^D'e > marbā^D'e
+[ "[" -> 0 ] ;
