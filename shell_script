@@ -1,0 +1,42 @@
+#***** shell_script *****
+# Th. Fransen, 23/08/19
+# Script to fill se.lexc with stems and consecutively read foma scripts
+
+echo ">>> Opening shell_script ..."
+
+# Swap stem list files (.txt) for <PLACEHOLDERS> in se_empty.lexc, employing intermediate temp files
+echo ">>> Adding stems to se.lexc ..."
+sed -e '/<INSERT SIMPLE W1 STEMS>/r stems/simpleW1.txt' -e '/<INSERT SIMPLE W1 STEMS>/d' se_empty.lexc > se_temp1.lexc
+sed -e '/<INSERT SIMPLE W2a STEMS>/r stems/simpleW2a.txt' -e '/<INSERT SIMPLE W2a STEMS>/d' se_temp1.lexc > se_temp2.lexc 
+sed -e '/<INSERT COMPOUND W1 STEMS>/r stems/compoundW1.txt' -e '/<INSERT COMPOUND W1 STEMS>/d' se_temp2.lexc > se_temp3.lexc
+sed -e '/<INSERT COMPOUND W2a STEMS>/r stems/compoundW2a.txt' -e '/<INSERT COMPOUND W2a STEMS>/d' se_temp3.lexc > se.lexc
+mv se.lexc lexc
+rm se_temp1.lexc se_temp2.lexc se_temp3.lexc
+
+# Temporarily move lexicons and rules to scripts directory
+echo ">>> Moving files to scripts directory ..."
+mv lexc/*.lexc scripts
+mv rules/*.rule scripts
+
+echo ">>> Going to scripts directory ..."
+cd scripts
+
+# foma
+echo ">>> Reading script files in foma ..."
+foma -l alphabet.script \
+foma -l mutation.script \
+foma -l cap.script \
+foma -l proclitic.script \
+foma -l se_1_bare.script \
+foma -l se_2_abs_conj.script \
+foma -l se_3_mut.script \
+foma -l procl_se.script \
+foma -l v_all.script \
+foma -l all.script \
+
+echo ">>> Moving files back to directories ..."
+cd ..
+mv scripts/*.lexc lexc
+mv scripts/*.rule rules
+# Move saved fsts to fst directory
+mv scripts/*.fst fst

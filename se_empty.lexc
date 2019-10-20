@@ -1,0 +1,456 @@
+!***** se.lexc *****
+! Th. Fransen, 13/08/19
+
+!\\\\\ DECLARE MULTICHAR SYMBOLS /////
+
+Multichar_Symbols
+
+! *UPPER symbols (Tags)*
+
++
++1P
++2P
++3P
++ABS
++AUG
++COND
++CONJ
++CONSUETUD
++EMPH
++FEM
++FUT
++IMPERS
++IPF
++IMP
++IND
++MASC
++NEUT
++PASS
++PAST
++PL
++PRON
++PRS
++PRT
++PV1
++PV2
++PV3
++PV4
++REL
++RUL
++SG
++SUBJ
++SUBST
++VROOT
++W1
++W2a
+
+! *LOWER symbols*
+
+^D
+^F
+^M
+^N
+^S
+^U
+^V
+^Vemph1SG
+^Vemph2SG
+^Vemph3P
+^UNKNOWN
+
+! *Flags*
+
+@P.W2a.ON@
+@R.W2a.ON@
+@D.PV@
+@D.PART.NO@
+@R.PV.AD@
+@R.PV.ARE@
+@R.PV.COM@
+@R.PV.FO@
+@R.PV.IMBI@
+@R.PV.TO@
+@R.PV.SV@
+
+!\\\\\ BEGIN CONTINUATION CLASSES /////
+
+!\\\\\ STEMS /////
+
+!*** Root = start ***
+
+LEXICON Root
+@D.PV@			simpleStems;
+@D.PART.NO@		compoundStems;
+				substV;
+	
+!*** simple vs. compound ***
+
+LEXICON simpleStems
+	simpleW1;
+	simpleW2a;
+! continuation classes for strong types can be added later
+
+LEXICON compoundStems
+	compoundW1;
+	compoundW2a;
+! continuation classes for strong types can be added later
+
+!*** Shell script inserts stems, maintained in separate files, for <PLACEHOLDERS> ***
+
+LEXICON simpleW1
+<INSERT SIMPLE W1 STEMS>
+
+LEXICON simpleW2a
+<INSERT SIMPLE W2a STEMS>
+
+LEXICON compoundW1
+<INSERT COMPOUND W1 STEMS>
+
+LEXICON compoundW2a
+<INSERT COMPOUND W2a STEMS>
+
+!*** Weak stem formation ***
+
+LEXICON W1
++W1:ā	weakStemFormation;
+
+LEXICON W2a
+@P.W2a.ON@+W2a:ī	weakStemFormation;
+
+LEXICON weakStemFormation
++PRS+IND:0		weakPresIndEndings;
++IMP:0			weakImpEndings;
++IPF:0			secEndings;
++PRS+SUBJ:0		aEndings;
++PAST+SUBJ:0	secEndings;
++FUT:^F			aEndings; 
++COND:^F		secEndings;
++PRT:^S			sPretEndings; 
++PRT+PASS:θ		pretPassEndings;
+
+!\\\\\ ENDINGS /////
+
+LEXICON weakPresIndEndings
++ABS+1P+SG:^M'				Emph1sg; 
+@R.W2a.ON@+ABS+1P+SG:u		Emph1sg;
++ABS+2P+SG:i				Emph2sg;
++ABS+3P+SG:θ'				suffAbs3sg;
++ABS+3P+SG+REL:s			Emph3sg;
++ABS+1P+PL:^M'i				Emph1pl;
++ABS+1P+PL+REL:^M'e			Emph1pl;
++ABS+2P+PL:θ'e				Emph2pl;
++ABS+3P+PL:t'				Emph3pl;
++ABS+3P+PL+REL:^V^D'e		Emph3pl;
++CONJ+1P+SG:^M'				Emph;
+@R.W2a.ON@+CONJ+1P+SG:u		Emph;
++CONJ+2P+SG:i				Emph;
++CONJ+3P+SG:0				Emph;
++CONJ+1P+PL:μ				Emph;
++CONJ+2P+PL:θ'				Emph;
++CONJ+3P+PL:t				Emph;
++PASS:0						pass1Endings;
+
+LEXICON weakImpEndings
++CONJ+1P+SG:^M'				Emph;
+@R.W2a.ON@+CONJ+1P+SG:u		Emph;
++CONJ+2P+SG:Ø				Emph;
++CONJ+3P+SG:θ				Emph;
++CONJ+1P+PL:μ				Emph;
++CONJ+2P+PL:θ'				Emph;
++CONJ+3P+PL:t				Emph;
++PASS:0						pass1Endings;
+
+LEXICON aEndings
++ABS+1P+SG:a			Emph1sg;
++ABS+2P+SG:e			Emph2sg;
++ABS+3P+SG:θ'			suffAbs3sg;
++ABS+3P+SG+REL:s		Emph3sg;
++ABS+1P+PL:^M'i			Emph1pl;
++ABS+1P+PL+REL:^M'e		Emph1pl;
++ABS+2P+PL:θ'e			Emph2pl;
++ABS+3P+PL:t'			Emph3pl;
++ABS+3P+PL+REL:^V^D'e	Emph3pl;
++CONJ+1P+SG:Ø			Emph;
++CONJ+2P+SG:e			Emph;
++CONJ+3P+SG:a			Emph;
++CONJ+1P+PL:μ			Emph;
++CONJ+2P+PL:θ'			Emph;
++CONJ+3P+PL:t			Emph;
++PASS:0					pass1Endings;
+
+LEXICON sPretEndings
++ABS+1P+SG:u			Emph1sg;
++ABS+2P+SG:'i			Emph2sg;
++ABS+3P+SG:'			suffAbs3sg;
++ABS+3P+SG+REL:0		Emph3sg;
++ABS+1P+PL:ə^M'i		Emph1pl;
++ABS+1P+PL+REL:ə^M'e	Emph1pl;
++ABS+2P+PL:^UNKNOWN		Emph2pl;
++ABS+3P+PL:ət'			Emph3pl;
++ABS+3P+PL+REL:ət'e		Emph3pl;
++CONJ+1P+SG:^U			Emph;
++CONJ+2P+SG:'			Emph;
++CONJ+3P+SG:Ø			Emph;
++CONJ+1P+PL:əμ			Emph;
++CONJ+2P+PL:əθ'			Emph;
++CONJ+3P+PL:ət			Emph;
+
+LEXICON pass1Endings	
++ABS+3P+SG:θ'ər'		Emph3sg;
++ABS+3P+SG+REL:θ'ər		Emph3sg;
++ABS+3P+PL:t'ər'  		Emph3pl;
++ABS+3P+PL+REL:^V^Dər	Emph3pl;
++CONJ+3P+SG:θ'ər   		Emph; 
++CONJ+3P+PL:^V^Dər		Emph3pl;
+
+LEXICON pretPassEndings	
++ABS+3P+SG:e		Emph3sg;
++ABS+3P+SG+REL:e	Emph3sg;
++ABS+3P+PL:i  		Emph3pl;
++ABS+3P+PL+REL:i	Emph3pl;
++CONJ+3P+SG:0    	Emph; 
++CONJ+3P+PL:a    	Emph3pl;
+
+LEXICON secEndings
++CONJ+1P+SG:^N'			Emph;
++CONJ+2P+SG:θa			Emph;
++CONJ+3P+SG:θ			Emph;  
++PASS+CONJ+3P+SG:θ'e	Emph;
++CONJ+1P+PL:^M'əs'		Emph; 
++CONJ+2P+PL:θ'e			Emph;
++CONJ+3P+PL:t'əs'		Emph;
++PASS+CONJ+3P+PL:t'əs'	Emph;
+
+!\\\\\ SUBSTANTIVE VERB /////
+
+LEXICON substV
+@R.PV.SV@+tá+VROOT+SUBST+PRS+IND:0		Tá;
+@D.PV@+tá+VROOT+SUBST+PRS+IND:0			Tá;
+@D.PV@+fil+VROOT+SUBST+PRS+IND:0		Fil;
+@D.PV@									Bí;
+@D.PV@									TápresWithSuffPron;
+@D.PV@									BípretWithSuffPron;
+
+LEXICON Tá
++CONJ+1P+SG:táu						Emph1sg;
++CONJ+1P+SG:tó						Emph2sg;
++CONJ+3P+SG:tá						Emph3sg;
+@D.PV@+IMPERS+CONJ+3P+SG:táthar		#;
++CONJ+1P+PL:taam					Emph1pl;
++CONJ+2P+PL:taid					Emph2pl;
++CONJ+3P+PL:taat					Emph3pl;
+
+LEXICON Fil
++ABS+3P+SG:fil			#;
++ABS+3P+SG+REL:fil		#;
++ABS+3P+SG+REL:file		#;
++CONJ+3P+SG:fil			#;
+
+LEXICON Bí
+	SVconsuetud;
+	SVimpf;
+	SVpret;
+	SVfut;
+	SVcond;
+	SVimp;
+	SVpresSubj;
+	SVpastSubj;
+	
+LEXICON SVconsuetud
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+ABS+1P+SG:biuu			Emph1sg;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+ABS+3P+SG:biid			Emph3sg;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+ABS+3P+SG+REL:biis		Emph3sg;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+ABS+3P+SG+REL:bís			Emph3sg;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+IMPERS+ABS+3P+SG:bíthir	#;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+ABS+1P+PL:bímmi			Emph1pl;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+ABS+1P+PL+REL:bímme		Emph1pl;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+ABS+3P+PL:biit			Emph3pl;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+ABS+3P+PL+REL:bíte		Emph3pl;
+
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+CONJ+1P+SG:bíu					Emph1sg;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+CONJ+2P+SG:bí						Emph2sg;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+CONJ+3P+SG:bí						Emph;
++ro+AUG+bí+VROOT+SUBST+PRS+IND+CONSUETUD+CONJ+3P+SG:rubai			Emph;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+IMPERS+CONJ+3P+SG:bíther			#;	
++ro+AUG+bí+VROOT+SUBST+PRS+IND+CONSUETUD+IMPERS+CONJ+3P+SG:rubthar	#;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+CONJ+1P+PL:biam					Emph1pl;
++bí+VROOT+SUBST+PRS+IND+CONSUETUD+CONJ+3P+PL:biat					Emph3pl;
++ro+AUG+bí+VROOT+SUBST+PRS+IND+CONSUETUD+CONJ+3P+PL:rubat			Emph3pl;
+
+LEXICON SVimpf
++bí+VROOT+SUBST+IPF+CONJ+1P+SG:biinn			Emph1sg;
++bí+VROOT+SUBST+IPF+CONJ+3P+SG:bíth				Emph;
++bí+VROOT+SUBST+IPF+IMPERS+CONJ+3P+SG:bíthe		#;
++bí+VROOT+SUBST+IPF+CONJ+1P+PL:bimmis			Emph1pl;
++bí+VROOT+SUBST+IPF+CONJ+3P+PL:bítis			Emph3pl;
+
+LEXICON SVpret
++bí+VROOT+SUBST+PRT+ABS+1P+SG:bá				Emph1sg;
++bí+VROOT+SUBST+PRT+ABS+2P+SG:bá				Emph2sg;
++bí+VROOT+SUBST+PRT+ABS+3P+SG:boí				Emph3sg;
++bí+VROOT+SUBST+PRT+ABS+3P+SG+REL:boíe			Emph3sg;
++bí+VROOT+SUBST+PRT+IMPERS+ABS+3P+SG:bothae		#;
++bí+VROOT+SUBST+PRT+ABS+1P+PL:bámmar			Emph1pl;
++bí+VROOT+SUBST+PRT+ABS+3P+PL:bátar				Emph3pl;
+
++bí+VROOT+SUBST+PRT+CONJ+1P+SG:bá				Emph1sg;
++bí+VROOT+SUBST+PRT+CONJ+2P+SG:bá				Emph2sg;
++bí+VROOT+SUBST+PRT+CONJ+3P+SG:boí				Emph;
++bí+VROOT+SUBST+PRT+IMPERS+CONJ+3P+SG:both		#;
++bí+VROOT+SUBST+PRT+CONJ+1P+PL:bámmar			Emph1pl;
++bí+VROOT+SUBST+PRT+CONJ+2P+PL:báid				Emph2pl;
++bí+VROOT+SUBST+PRT+CONJ+3P+PL:bátar			Emph3pl;
+
++ro+AUG+bí+VROOT+SUBST+PRT+CONJ+1P+SG:roba				Emph1sg;
++ro+AUG+bí+VROOT+SUBST+PRT+CONJ+1P+SG:raba				Emph1sg;
++ro+AUG+bí+VROOT+SUBST+PRT+CONJ+2P+SG:raba				Emph2sg;
++ro+AUG+bí+VROOT+SUBST+PRT+CONJ+3P+SG:robae				Emph;
++ro+AUG+bí+VROOT+SUBST+PRT+CONJ+3P+SG:rabae				Emph;
++ro+AUG+bí+VROOT+SUBST+PRT+IMPERS+CONJ+3P+SG:robad		#;
++ro+AUG+bí+VROOT+SUBST+PRT+CONJ+1P+PL:roba^Vmmar		Emph1pl;
++ro+AUG+bí+VROOT+SUBST+PRT+CONJ+2P+PL:robaid			Emph2pl;
++ro+AUG+bí+VROOT+SUBST+PRT+CONJ+3P+PL:robatar			Emph3pl;
++ro+AUG+bí+VROOT+SUBST+PRT+CONJ+3P+PL:rabatar			Emph3pl; 
+
+LEXICON SVfut
++bí+VROOT+SUBST+FUT+ABS+1P+SG:bia				Emph1sg;
++bí+VROOT+SUBST+FUT+ABS+2P+SG:bie				Emph2sg;
++bí+VROOT+SUBST+FUT+ABS+3P+SG:bieid				Emph3sg;
++bí+VROOT+SUBST+FUT+ABS+3P+SG:bied				Emph3sg;
++bí+VROOT+SUBST+FUT+ABS+3P+SG+REL:bias			Emph3sg;
++bí+VROOT+SUBST+FUT+IMPERS+ABS+3P+SG:bethir		#;
++bí+VROOT+SUBST+FUT+ABS+1P+PL:bemmi				Emph1pl;
++bí+VROOT+SUBST+FUT+ABS+2P+PL:bethe				Emph2pl;
++bí+VROOT+SUBST+FUT+ABS+3P+PL:bieit				Emph3pl;
++bí+VROOT+SUBST+FUT+ABS+3P+PL+REL:bete			Emph3pl;
+
++bí+VROOT+SUBST+FUT+CONJ+3P+SG:bia		Emph;
++bí+VROOT+SUBST+FUT+CONJ+1P+PL:biam		Emph1pl;
++bí+VROOT+SUBST+FUT+CONJ+2P+PL:bieid	Emph2pl;
++bí+VROOT+SUBST+FUT+CONJ+2P+PL:bied		Emph2pl;
++bí+VROOT+SUBST+FUT+CONJ+3P+PL:biat		Emph3pl;
+
+LEXICON SVcond
++bí+VROOT+SUBST+COND+CONJ+1P+SG:beinn	Emph1sg;
++bí+VROOT+SUBST+COND+CONJ+3P+SG:biad	Emph;
++bí+VROOT+SUBST+COND+CONJ+1P+PL:bemmis	Emph1pl;
++bí+VROOT+SUBST+COND+CONJ+3P+PL:betis	Emph3pl;
+
+LEXICON SVimp
++bí+VROOT+SUBST+IMP+CONJ+2P+SG:bí		Emph1sg;
++bí+VROOT+SUBST+IMP+CONJ+3P+SG:biid		Emph2sg;
++bí+VROOT+SUBST+IMP+CONJ+3P+SG:bíth		Emph;
++bí+VROOT+SUBST+IMP+CONJ+2P+PL:biid		Emph2pl;
++bí+VROOT+SUBST+IMP+CONJ+2P+PL:bíth		Emph2pl;
++bí+VROOT+SUBST+IMP+CONJ+3P+PL:biat		Emph3pl;
+
+LEXICON SVpresSubj
++bí+VROOT+SUBST+PRS+SUBJ+ABS+1P+SG:béo				Emph1sg;
++bí+VROOT+SUBST+PRS+SUBJ+ABS+1P+SG:béu				Emph1sg;
++bí+VROOT+SUBST+PRS+SUBJ+ABS+2P+SG:bé				Emph2sg;
++bí+VROOT+SUBST+PRS+SUBJ+ABS+2P+SG:bee				Emph2sg;
++bí+VROOT+SUBST+PRS+SUBJ+ABS+3P+SG:beiθ				Emph3sg;
++bí+VROOT+SUBST+PRS+SUBJ+ABS+3P+SG+REL:bes			Emph3sg;
++bí+VROOT+SUBST+PRS+SUBJ+IMPERS+ABS+3P+SG:bethir	#;
++bí+VROOT+SUBST+PRS+SUBJ+ABS+1P+PL:bemmi			Emph1pl;
++bí+VROOT+SUBST+PRS+SUBJ+ABS+2P+PL:bethe			Emph2pl;
++bí+VROOT+SUBST+PRS+SUBJ+ABS+3P+PL:beit				Emph3pl;
++bí+VROOT+SUBST+PRS+SUBJ+ABS+3P+PL+REL:bete			Emph3pl;
+
++bí+VROOT+SUBST+PRS+SUBJ+CONJ+1P+SG:béo		Emph1sg;
++bí+VROOT+SUBST+PRS+SUBJ+CONJ+2P+SG:bé		Emph2sg;
++bí+VROOT+SUBST+PRS+SUBJ+CONJ+3P+SG:bé		Emph;
++bí+VROOT+SUBST+PRS+SUBJ+CONJ+1P+PL:bem		Emph1pl;
++bí+VROOT+SUBST+PRS+SUBJ+CONJ+2P+PL:beid	Emph2pl;
++bí+VROOT+SUBST+PRS+SUBJ+CONJ+3P+PL:bet		Emph3pl;
+
++ro+AUG+bí+VROOT+SUBST+PRS+SUBJ+CONJ+3P+SG:roib		Emph; 
++ro+AUG+bí+VROOT+SUBST+PRS+SUBJ+CONJ+1P+PL:robam	Emph1pl;
++ro+AUG+bí+VROOT+SUBST+PRS+SUBJ+CONJ+2P+PL:robith	Emph2pl;
++ro+AUG+bí+VROOT+SUBST+PRS+SUBJ+CONJ+3P+PL:robat	Emph3pl;
+
+LEXICON SVpastSubj
++bí+VROOT+SUBST+PAST+SUBJ+CONJ+1P+SG:beinn			Emph1sg;
++bí+VROOT+SUBST+PAST+SUBJ+CONJ+2P+SG:betha			Emph2sg;
++bí+VROOT+SUBST+PAST+SUBJ+CONJ+3P+SG:beθ			Emph3sg;
++bí+VROOT+SUBST+PAST+SUBJ+IMPERS+CONJ+3P+SG:bethe	#;
++bí+VROOT+SUBST+PAST+SUBJ+CONJ+1P+PL:bemmis			Emph1pl;
++bí+VROOT+SUBST+PAST+SUBJ+CONJ+2P+PL:bethe			Emph2pl;
++bí+VROOT+SUBST+PAST+SUBJ+CONJ+3P+PL:betis			Emph3pl;
+
++ro+AUG+bí+VROOT+SUBST+PAST+SUBJ+CONJ+3P+SG:robad		Emph;
++ro+AUG+bí+VROOT+SUBST+PAST+SUBJ+CONJ+3P+PL:roibtis		Emph3pl;
+
+LEXICON TápresWithSuffPron
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+1P+SG:táthum			#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+2P+SG:táthut  		#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+3P+SG+MASC:táithi	#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+3P+SG+MASC:táthai  	#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+3P+SG+NEUT:táithi	#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+3P+SG+NEUT:táthai  	#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+3P+SG+FEM:táthus  	#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+1P+PL:táthunn		#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+1P+PL:táithiunn		#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+2P+PL:táthuib		#;
++tá+VROOT+SUBST+PRS+IND+ABS+3P+SG+PRON+3P+PL:táthus			#;
+
+LEXICON BípretWithSuffPron
++bí+VROOT+SUBST+PRT+ABS+3P+SG+PRON+1P+SG:baíthum		#;
++bí+VROOT+SUBST+PRT+ABS+3P+SG+PRON+2P+SG:baíthut  		#;
++bí+VROOT+SUBST+PRT+ABS+3P+SG+PRON+3P+SG+MASC:baíthi	#;
++bí+VROOT+SUBST+PRT+ABS+3P+SG+PRON+3P+SG+NEUT:baíthi	#;
++bí+VROOT+SUBST+PRT+ABS+3P+SG+PRON+3P+SG+FEM:boíthus	#;
++bí+VROOT+SUBST+PRT+ABS+3P+SG+PRON+3P+PL:boíthus		#;
+
+!!\\\\\ SUFFIXES /////
+
+LEXICON Emph
+		#;
+0:-		Emph2;
+
+LEXICON Emph2
++EMPH+1P+SG:s^Vemph1SG			#;
++EMPH+2P+SG:s^Vemph2SG			#;
++EMPH+3P+SG+MASC:s^Vemph3Pm		#;
++EMPH+3P+SG+NEUT:s^Vemph3Pm		#;
++EMPH+3P+SG+FEM:si				#;
++EMPH+1P+PL:ni					#;
++EMPH+2P+PL:si					#;
++EMPH+3P+PL:s^Vemph3Pm			#;
+
+LEXICON suffAbs3sg
+						Emph3sg;
++PRON+1P+SG:um      	#;
++PRON+2P+SG:ut      	#;
++PRON+3P+SG+MASC:i		#;
++PRON+3P+SG+NEUT:i		#;
++PRON+3P+SG+FEM:us		#;
++PRON+1P+PL:unn			#;
++PRON+2P+PL:uib			#;
++PRON+3P+PL:us			#;
+
+LEXICON Emph1sg
+							#;
++EMPH+1P+SG:-s^Vemph1SG		#;
+
+LEXICON Emph2sg
+							#;	
++EMPH+2P+SG:-s^Vemph2SG		#;
+
+LEXICON Emph3sg
+								#;
++EMPH+3P+SG+MASC:-s^Vemph3Pm	#;
++EMPH+3P+SG+NEUT:-s^Vemph3Pm	#;
++EMPH+3P+SG+FEM:-si				#;
+							
+LEXICON Emph1pl
+					#;
++EMPH+1P+PL:-ni		#;
+
+LEXICON Emph2pl
+					#;
++EMPH+2P+PL:-si		#;
+
+LEXICON Emph3pl
+							#;
++EMPH+3P+PL:-s^Vemph3Pm		#;
