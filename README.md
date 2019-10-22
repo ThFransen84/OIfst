@@ -11,4 +11,4 @@ The directory 'fst' contains saved binary files; running 'shell_script' is only 
 1. oiv.fst: Old Irish verbs
 2. oiAll.fst: additional frequent words.
 
-The development of an Old Irish FST was part of my Ph.D. thesis, for which see http://www.tara.tcd.ie/handle/2262/89498. Chapter 4 (pp. 55–104) describes the implementation in great detail. A list of errata for the thesis in general can be found under 'projects' in this repository, at https://github.com/ThFransen84/OIfst/projects/1.
+The development of an Old Irish FST was part of my Ph.D. thesis, for which see http://www.tara.tcd.ie/handle/2262/89498. Chapter 4 (pp. 55–104) describes the implementation in great detail. A list of errata for the thesis in general can be found under 'projects' in this repository (https://github.com/ThFransen84/OIfst/projects/1).
