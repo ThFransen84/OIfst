@@ -1,6 +1,8 @@
 Old Irish Morphological Finite-State Transducer (FST), mainly for verbs
 ====
 
+[logo]: https://raw.githubusercontent.com/ThFransen84/OIfst/master/logo.png "FST logo"
+
 The FST has been implemented in foma, a finite-state compiler and C library developed by Mans Hulden. For download instructions and documentation see https://fomafst.github.io/.
 
 The code consists of lexicon files (.lexc), rules (.rule), scripts (.script), stems (.txt), and binary files (.fst), put in their respective directories. The directory structure should be maintained if making changes to files and running the file 'shell_script', which:
