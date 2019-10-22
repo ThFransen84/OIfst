@@ -3,7 +3,7 @@ Old Irish Morphological Finite-State Transducer (FST), mainly for verbs
 
 <img src="https://raw.githubusercontent.com/ThFransen84/OIfst/master/logo.png" alt="FST logo" width="200" height="100">
 
-The development of an Old Irish FST was part of my Ph.D. thesis, for which see the Wiki. which is available [here](http://www.tara.tcd.ie/handle/2262/89498). The abstract (with proper text encoding), as well as a list of *errata*, can be found under [Projects](https://github.com/ThFransen84/OIfst/projects). Chapter 4 (pp. 55–104) in the thesis describes the implementation in great detail.
+The development of an Old Irish FST was part of my Ph.D. thesis, for which see this [Wiki]{https://github.com/ThFransen84/OIfst/wiki/Ph.D.-thesis-(2019)}.
 
 The FST has been implemented in *foma*, a finite-state compiler and C library developed by Mans Hulden. For download instructions and documentation see https://fomafst.github.io/.
 
