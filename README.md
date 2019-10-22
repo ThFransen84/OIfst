@@ -1,7 +1,7 @@
 Old Irish Morphological Finite-State Transducer (FST), mainly for verbs
 ====
 
-[logo]: https://raw.githubusercontent.com/ThFransen84/OIfst/master/logo.png "FST logo"
+![alt text](https://raw.githubusercontent.com/ThFransen84/OIfst/master/logo.png "FST logo")
 
 The FST has been implemented in foma, a finite-state compiler and C library developed by Mans Hulden. For download instructions and documentation see https://fomafst.github.io/.
 
