@@ -1,6 +1,6 @@
 #***** se_3_mut.script *****
 # Th. Fransen, 19/08/19
-# Apply mutation transducers and replace rules (mut.script) to absolute and conjunct forms
+# Apply mutation transducers and replace rules (mutation.script) to absolute and conjunct forms
 
 clear stack
 
