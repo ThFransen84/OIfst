@@ -11,7 +11,7 @@ The code in this repository consists of lexicon files (`.lexc`), rules (`.rule`)
 1. contains unix commands to handle the insertion of stem lists into `se_empty.lexc` (to create `se.lexc`), and 
 2. invokes *foma* script files* to create binary `.fst` files. 
 
-\*script files typically read in external lexicon and rule files, and (in this implementation) also employ variables previously defined in other script files and as such present in memory.
+\*script files typically read in external lexicon and rule files, and in this implementation also employ variables previously defined in other script files and as such present in memory.
 
 The directory `.fst` already contains the latest saved binary files; running `shell_script` is therefore only necessary after updating files (typically the stem lists), to create new `.fst` files, of which there are two:
 1. `oiv.fst`: Old Irish verbs
