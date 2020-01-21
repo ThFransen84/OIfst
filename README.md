@@ -14,5 +14,5 @@ The code in this repository consists of lexicon files (`.lexc`), rules (`.rule`)
 \*script files typically read in external lexicon and rule files, and in this implementation also employ variables previously defined in other script files and as such present in memory.
 
 The directory `fst` already contains the latest saved binary files; running `shell_script` is therefore only necessary after updating files (typically the stem lists), to create new `.fst` files, of which there are two:
-1. `oiv.fst`: Old Irish verbs
+1. `oiv.fst`: Old Irish verbs (or, more correctly, the verbal complex)
 2. `oiAll.fst`: additional frequent words taken from the Early Irish narrative text *Táin Bó Fraích* (see Chapter 5 of my Ph.D. thesis).
