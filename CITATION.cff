@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Fransen
+    given-names: Theodorus
+    orcid: https://orcid.org/0000-0001-5639-8626
+title: "Old Irish Morphological Finite-State Transducer (FST)"
+version: 1.0.0
+identifiers:
+  - type:
+    value
+date-released:
